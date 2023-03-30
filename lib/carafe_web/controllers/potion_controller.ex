@@ -2,7 +2,6 @@ defmodule CarafeWeb.PotionController do
   use CarafeWeb, :controller
 
   alias Carafe.Potions
-  alias Carafe.Accounts
   alias Carafe.Review
 
   def index(conn, %{"name" => name}) do
