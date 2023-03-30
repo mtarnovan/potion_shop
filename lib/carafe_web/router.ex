@@ -13,15 +13,6 @@ defmodule CarafeWeb.Router do
     plug :fetch_current_user
   end
 
-  pipeline :browser_auth do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_live_flash
-    plug :put_root_layout, {CarafeWeb.LayoutView, :root}
-    plug :put_secure_browser_headers
-    plug :fetch_current_user
-  end
-
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -33,7 +24,7 @@ defmodule CarafeWeb.Router do
   end
 
   scope "/", CarafeWeb do
-    pipe_through [:browser_auth, :require_authenticated_user]
+    pipe_through [:browser, :require_authenticated_user]
 
     get "/potion/:id", PotionController, :show
     post "/potion/review/:id", PotionController, :create_review
